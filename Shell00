@@ -1,0 +1,494 @@
+#!/bin/bash 
+git log --format='%H' -n5
+
+#!/bin/bash
+git ls-files  --exclude-standard --others --ignored
+
+a
+STARWARS
+Episode IV, A NEW HOPE It is a period of civil war.
+
+Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.
+During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR,
+an armored space station with enough power to destroy an entire planet.
+
+Pursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy...
+
+b
+Episode V, A NEW H0PE It is a period of civil war
+Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire. 
+During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the STAR DEATH, an armored space station with enough power to destroy an entire planet.
+
+
+Pursued by the Empire's sinister agents,
+Princess Mehdi races home aboard her starship, custodian of the stolen plans that can save her people and restore the dictatorship to the galaxie..
+
+sw.diff
+1,2c1,8
+< STARWARS
+< Episode IV, A NEW HOPE It is a period of civil war.
+---
+> Episode V, A NEW H0PE It is a period of civil war
+> Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire. 
+> During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the STAR DEATH, an armored space station with enough power to destroy an entire planet.
+> 
+> 
+> Pursued by the Empire's sinister agents,
+> Princess Mehdi races home aboard her starship, custodian of the stolen plans that can save her people and restore the dictatorship to the galaxie..
+> 
+4,6d9
+< Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.
+< During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR,
+< an armored space station with enough power to destroy an entire planet.
+8d10
+< Pursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy...
+
+
+find . -type f \( -name "#*#" -o -name "*~" \) -print -delete 
+
+
+
+
+
+Shell01
+id -Gn $FT_USER | tr ' ' ',' | tr -d "\n"
+
+find . -type f -name "*.sh" -exec basename {} .sh \;
+
+find . | wc -l | sed 's/ //g'
+
+ifconfig | grep -w ether | cut -d " " -f 2
+
+ls -l | awk 'NR%2==1'
+
+cat /etc/passwd | sed '/^#/d' | awk 'NR % 2 == 0 {print $0}' | awk -F ":" '{  print $1 }' | rev | sort -fnr | awk -v FT_LINE1="$FT_LINE1" -v FT_LINE2="$FT_LINE2"  'NR >= FT_LINE1 && NR <= FT_LINE2 { print $0 }' | tr '\n' ' '  | sed 's+ +, +g' | sed 's+, $+.+g' | tr -d '\n'
+
+echo $FT_NBR1 = \'\?\"\\\"\'\\ + $FT_NBR2=rcrdmddd | sed "s/\'/0/g" | tr '\\\"\?\!' 1234 | tr 'mrdoc' 01234 | xargs echo 'obase=13; ibase=5;' | bc | tr 0123456789ABC 'gtaio luSnemf'
+
+
+
+
+
+
+
+ex06 C00
+
+#include <unistd.h>
+#include <stdbool.h>
+
+void	ft_putchar (char c)
+{
+	write (1, &c, 1);
+}
+
+void	ft_write_comb(int a, int b, bool last)
+{
+	ft_putchar(48 + a / 10);
+	ft_putchar(48 + a % 10);
+	ft_putchar(' ');
+	ft_putchar(48 + b / 10);
+	ft_putchar(48 + b % 10);
+	if (last)
+	{
+		ft_putchar(',');
+		ft_putchar(' ');
+	}
+}
+
+void	ft_print_comb2(void)
+{
+	int	a;
+	int	b;
+	bool last;
+
+	a = 0;
+	while(a <= 99)
+	{
+		b = a + 1;
+		while (b <= 99)
+		{
+			last = !(a == 98 && b == 99);
+			ft_write_comb(a, b, last);
+			b++;
+		}
+		a++;
+	}
+}
+
+/* int main ()
+{
+	ft_print_comb2();
+} */
+
+
+
+ex07
+#include <unistd.h>
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int nb)
+{
+	if (nb == -2147483648)
+	{
+		ft_putchar('-');
+		ft_putchar('2');
+		ft_putnbr(147483648);
+	}
+	else if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = -nb;
+		ft_putnbr(nb);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else
+		 ft_putchar(nb + 48);
+}
+
+
+ex08
+#include <unistd.h>
+#include <stdbool.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	print(int *tab, int n)
+{
+	int		i;
+	bool		low;
+
+	i = 1;
+	low = 1;
+	while (i < n)
+	{
+		if (tab[i - 1] >= tab[i])
+			low = 0;
+		i++;
+	}
+	if (low)
+	{
+		i = 0;
+		while (i < n)
+			ft_putchar(tab[i++] + 48);
+		if (tab[0] < (10 - n))
+		{
+			ft_putchar(',');
+			ft_putchar(' ');
+		}
+	}
+}
+
+void	ft_print_combn(int n)
+{
+	int		i;
+	int		tab[n];
+
+	i = 0;
+	while (i < n)
+		tab[i++] = 0;
+	while (tab[0] <= (10 - n) && n >= 1 && n < 10)
+	{
+		print(tab, n);
+		tab[n - 1]++;
+		i = n - 1;
+		while (i && n > 1)
+		{
+			if (tab[i] > 9)
+			{
+				tab[i - 1]++;
+				tab[i] = 0;
+			}
+			i--;
+		} 
+	}
+}
+/*int	main()
+{
+	ft_print_combn(0);
+} */
+
+
+exam01
+Assignment name  : only_a
+Expected files   : only_a.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that displays a 'a' character on the standard output.
+
+#include <unistd.h>
+
+int		main(void)
+{
+	write(1, "a", 1);
+	return (0);
+}
+
+
+exam02
+Assignment name  : ft_countdown
+Expected files   : ft_countdown.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that displays all digits in descending order, followed by a
+newline.
+
+Example:
+$> ./ft_countdown | cat -e
+9876543210$
+$>
+
+#include <unistd.h>
+
+int		main(void)
+{
+	char digit;
+
+	digit = '9';
+	while (digit >= '0')
+	{
+		write(1, &digit, 1);
+		digit--;
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+
+
+exam03
+Assignment name  : ft_print_numbers
+Expected files   : ft_print_numbers.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a function that displays all digits in ascending order.
+
+Your function must be declared as follows:
+
+void	ft_print_numbers(void);
+
+#include <unistd.h>
+
+void	ft_print_numbers(void)
+{
+	char digit;
+	
+	digit = '0';
+	while (digit <= '9')
+	{
+		write(1, &digit, 1);
+		digit++;
+	}
+}
+
+
+exam04
+Assignment name  : maff_alpha
+Expected files   : maff_alpha.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that displays the alphabet, with even letters in uppercase, and
+odd letters in lowercase, followed by a newline.
+
+Example:
+
+$> ./maff_alpha | cat -e
+aBcDeFgHiJkLmNoPqRsTuVwXyZ$
+#include <unistd.h>
+
+int		main(void)
+{
+	write(1, "aBcDeFgHiJkLmNoPqRsTuVwXyZ\n", 27);
+	return (0);
+}
+
+
+exam05
+Assignment name  : maff_revalpha
+Expected files   : maff_revalpha.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that displays the alphabet in reverse, with even letters in
+uppercase, and odd letters in lowercase, followed by a newline.
+
+Example:
+
+$> ./maff_revalpha | cat -e
+zYxWvUtSrQpOnMlKjIhGfEdCbA$
+
+#include <unistd.h>
+
+int		main(void)
+{
+	write(1, "zYxWvUtSrQpOnMlKjIhGfEdCbA\n", 27);
+	return (0);
+}
+
+
+exam06
+Assignment name  : hello
+Expected files   : hello.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that displays "Hello World!" followed by a \n.
+
+Example:
+
+$>./hello
+Hello World!
+$>./hello | cat -e
+Hello World!$
+$>
+
+#include <unistd.h>
+
+int		main(void)
+{
+	write(1, "Hello World!\n", 13);
+	return (0);
+}
+
+
+exam07
+Assignment name  : ft_swap
+Expected files   : ft_swap.c
+Allowed functions: 
+--------------------------------------------------------------------------------
+
+Write a function that swaps the contents of two integers the adresses of which
+are passed as parameters.
+
+Your function must be declared as follows:
+
+void	ft_swap(int *a, int *b);
+
+void	ft_swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+
+Assignment name  : ft_strcmp
+Expected files   : ft_strcmp.c
+Allowed functions: 
+--------------------------------------------------------------------------------
+
+Reproduce the behavior of the function strcmp (man strcmp).
+
+Your function must be declared as follows:
+
+int    ft_strcmp(char *s1, char *s2);
+
+int		ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+
+Assignment name  : ft_strrev
+Expected files   : ft_strrev.c
+Allowed functions: 
+--------------------------------------------------------------------------------
+
+Write a function that reverses (in-place) a string.
+
+It must return its parameter.
+
+Your function must be declared as follows:
+
+char    *ft_strrev(char *str);
+
+int		ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strrev(char *str)
+{
+	int i;
+	int len;
+	char tmp;
+
+	i = 0;
+	len = ft_strlen(str) - 1;
+	while (len > i)
+	{
+		tmp = str[i];
+		str[i] = str[len];
+		str[len] = tmp;
+		i++;
+		len--;
+	}
+	return (str);
+}
+
+
+Assignment name  : ft_atoi
+Expected files   : ft_atoi.c
+Allowed functions: None
+--------------------------------------------------------------------------------
+
+Write a function that converts the string argument str to an integer (type int)
+and returns it.
+
+It works much like the standard atoi(const char *str) function, see the man.
+
+Your function must be declared as follows:
+
+int	ft_atoi(const char *str);
+
+int		ft_atoi(const char *str)
+{
+	int i;
+	int sign;
+	int result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
+	{
+		result *= 10;
+		result += str[i] - '0';
+		i++;
+	}
+	return (result * sign);
+}
+
