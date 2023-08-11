@@ -1,6 +1,6 @@
 void ft_putchar(char c);
 
-// Function that writes in screen the first rectable row
+// Function that writes in screen the first rectangle row
 void ft_fill_first_row(int x)
 {
 	int i;
@@ -17,7 +17,7 @@ void ft_fill_first_row(int x)
 	ft_putchar('\n');
 }
 
-// Function that writes in screen all middle rectable rows
+// Function that writes in screen all middle rectangle rows
 void ft_fill_middle_row(int x)
 {
 	int i;
@@ -34,7 +34,7 @@ void ft_fill_middle_row(int x)
 	ft_putchar('\n');
 }
 
-// Function that writes in screen the last rectable row
+// Function that writes in screen the last rectangle row
 void ft_fill_last_row(int x)
 {
 	int i;
