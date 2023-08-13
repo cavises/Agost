@@ -126,3 +126,75 @@ int main (void)
 Exercici 08
 ===============================================================================================================
 
+#include <unistd.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void ft_print_numbers(int comb[], int n)
+{
+	int i;
+	char c;
+	
+	i = 0;
+	while (i < n)
+	{
+		c = (char) comb[i];
+		ft_putchar(c);
+		i++;
+	}
+}
+
+void ft_get_number(int comb[], int n)
+{
+	int i;
+	int val;
+	int valmax;
+	
+	i = n-1;
+	val = 0;
+	valmax = 9 - n + 1;
+	while(comb[0] <= valmax) //Checks if 1st list position value is the last permitted
+		ft_print_numbers(comb, n);
+		while(0 <= i)
+		{
+			while(comb[i] <= 9)
+			{
+				comb[i]++;
+				ft_putchar(',');
+				ft_putchar(' ');
+				ft_print_numbers(comb, n);
+			}
+			i--;
+			comb[i]++;
+			comb[i+1] = comb[i] + 1;
+		}
+}
+
+void ft_print_combn(int n)
+{
+	int	i;
+	int	comb[n];
+	int val;
+
+	i = 0;
+	val = 0;
+	while (n >= 1 && n < 10) //Checks if n is in Range
+	{
+		while (i < n) // List inicialization
+		{
+			comb[i] = val;
+			i++;
+			val++;
+		}
+		ft_get_number(comb, n);
+	}
+}
+
+int main(void)
+{
+	ft_print_combn(4);
+	return (0);
+}
