@@ -126,46 +126,93 @@ int main (void)
 Exercici 08
 ===============================================================================================================*/
 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_combn.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcaviede <dcaviede@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/14 11:48:42 by dcaviede          #+#    #+#             */
+/*   Updated: 2023/08/14 16:30:01 by dcaviede         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
-#include <stdbool.h>
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_write_comb(char a, char b, bool last)
+void	ft_write_combn(int n, int vector[])
 {
-	ft_putchar(a);
-	ft_putchar(b);
-	if (last)
+	int		i;
+	int	last;
+
+	i = 0;
+	while (i < n)
+	{
+		ft_putchar(48 + vector[i]);
+		i++;
+	}
+	i = n - 1;
+	last = 0;
+	while (i >= 0)
+	{
+		if (vector[i] != 9 - (n - 1 - i))
+		{
+			last = 1;
+			break ;
+		}
+		i--;
+	}
+	if (last == 0)
 	{
 		ft_putchar(',');
 		ft_putchar(' ');
 	}
 }
 
-void	ft_print_comb(void)
+void	ft_fill_vector(int n, int i, int vector[])
 {
-	char a;
-	char b;
-	bool last;
+	int	val;
+	int	valmax;
 
-	a = '0';
-	while (a <= '8')
+	if (i == n)
 	{
-		b = a + 1;
-		while (b <= '9')
+		ft_write_combn(n, vector);
+	}
+	else
+	{
+		valmax = 10 - (n - i);
+		val = 0;
+		while (val <= valmax)
 		{
-			last = !(a == '8' && b == '9');
-			ft_write_comb(a, b, last);
-			b++;
+			vector[i] = val;
+			ft_fill_vector(n, i + 1, vector);
+			val++;
 		}
-		a++;
 	}
 }
 
-int		main(void)
+void	ft_print_combn(int n)
 {
-	ft_print_comb();
+	int	vector[n];
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		vector[i] = 0;
+		i++;
+	}
+	i = 0;
+	ft_fill_vector(n, i, vector);
+}
+
+int	main(void)
+{
+	ft_print_combn(4);
+	return (0);
 }
