@@ -1,6 +1,7 @@
 ex01
 
 
+
 ex10
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
@@ -41,3 +42,55 @@ int				main(void)
 
 ex11
 
+#include <stdbool.h>
+#include <unistd.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	ft_printable(char c)
+{
+	if (c >= ' ' && c != 127)
+	  return (1);
+  else
+    return (0);
+}
+
+void	ft_putstr_non_printable(char *str)
+{
+	int		i_str;
+	int   c;
+	char	*basehexa;
+
+	i_str = 0;
+	basehexa = "0123456789abcdef";
+	while (str[i_str] != '\0')
+	{
+		if (ft_printable(str[i_str]) == 1)
+			ft_putchar(str[i_str]);
+		else
+		{
+			ft_putchar('\\');
+			if (str[i_str] < 0)
+				c = 256 + str[i_str];
+			else
+				c = str[i_str];
+			ft_putchar(basehexa[c / 16]);
+			ft_putchar(basehexa[c % 16]);
+		}
+		i_str++;
+	}
+}
+
+int		main(void)
+{
+	char	*string;
+	char b;
+	
+  b = -43;
+	//string = "Coucou\ntu vas bien ?";
+	//string = &b;
+	ft_putstr_non_printable(string);
+}
