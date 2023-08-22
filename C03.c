@@ -287,7 +287,51 @@ int main(void)
     return 0;
 }
 ++++++++++++++++++++
+#include<unistd.h>
 
+int	while1(int i, int l, char *str, char *to_find)
+{
+	int	a;
+
+	a = 0;
+	while (str[i + a] == to_find[a])
+	{
+		if (a == (l - 1))
+			return (1);
+		else if (a < l)
+			a++;
+	}
+	return (0);
+}
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	int			i;
+	int			l;
+	char		*ptr;
+
+	i = 0;
+	l = 0;
+	while (to_find[l])
+		l++;
+	if (l > 0)
+	{
+		while (str[i])
+		{
+			if (str[i] == to_find[0])
+			{
+				if (while1 (i, l, str, to_find))
+					return (ptr = &str[i]);
+			}
+			i++;
+		}
+	}
+	else
+		return (ptr = &str[0]);
+	return (0);
+}
+
++++++++++++++++++++++++++++++++++++++
 
 
 ex05
@@ -365,3 +409,29 @@ strlcat(char * restrict dst, const char * restrict src, size_t maxlen) {
     }
     return dstlen + srclen;
 }
+
++++++++++++++++++++++++++++++
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	d;
+	unsigned int	s;
+	unsigned int	i;
+
+	d = 0;
+	s = 0;
+	i = 0;
+	while (dest[d])
+		d++;
+	while (src[s])
+		s++;
+	if (size <= d)
+		return (s + size);
+	while (src[i] && (d + i) < (size - 1))
+	{
+		dest[d + i] = src[i];
+		i++;
+	}
+	dest[d + i] = '\0';
+	return (s + d);
+}
+++++++++++++++++++++++++++++++++++
