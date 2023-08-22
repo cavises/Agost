@@ -55,3 +55,53 @@ int	main(void)
 
 ex02
 
+#include <stdio.h>
+#include <string.h>
+
+char	*ft_strcat(char *dest, char *src)
+{
+	int end_dest;
+	int i_src;
+
+	end_dest = 0;
+	while (dest[end_dest] != '\0')
+		end_dest++;
+	i_src = 0;
+	while (src[i_src] != '\0')
+	{
+		dest[end_dest + i_src] = src[i_src];
+		i_src++;
+	}
+	dest[end_dest + i_src] = '\0';
+	return (dest);
+}
+
+int		main(void)
+{
+	char	*str_base;
+	char	dest[100];
+	char	dest2[100];
+	char	*src;
+	int		index;
+
+	str_base = "Hello";
+	src = " 42 42";
+	index = 0;
+	while (index < 6)
+	{
+		dest[index] = str_base[index];
+		dest2[index] = str_base[index];
+		index++;
+	}
+	printf("c  : %s$\n", strcat(dest, src));
+	printf("ft : %s$\n", ft_strcat(dest2, src));
+}
+
+
+
+ex03
+
+
+
+ex04
+
