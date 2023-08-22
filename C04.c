@@ -21,7 +21,17 @@ int	main(void)
 	printf("c  : %lu\n", strlen(str));
 	printf("ft : %d\n", ft_strlen(str));
 }
+++++++++++++++++++++++++
+int	ft_strlen(char *str)
+{
+	int	i;
 
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
++++++++++++++++++++++++++++
 
 ex01
 
@@ -40,7 +50,21 @@ int		main(void)
 	str = "Hello World";
 	ft_putstr(str);
 }
+++++++++++++++++++++++++++++
+#include <unistd.h>
 
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
++++++++++++++++++++++++++++++
 
 ex02
 
@@ -83,9 +107,49 @@ int		main(void)
 	ft_putchar('\n');
 	ft_putnbr(-2147483648);
 }
++++++++++++++++++++++++++++++++++
+#include <unistd.h>
+
+void	ft_putnbr(int nb)
+{
+	char	c;
+
+	if (nb == -2147483648)
+		write(1, "-2147483648", 11);
+	else if (nb < 0)
+	{
+		write(1, "-", 1);
+		ft_putnbr(-nb);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		c = nb % 10 + '0';
+		write(1, &c, 1);
+	}
+	else if (nb <= 9)
+	{
+		c = nb + '0';
+		write(1, &c, 1);
+	}
+}
+
+/*int	main()
+{
+	ft_putnbr(-2147483648);
+	write(1, "\n", 1);
+	ft_putnbr(2147483647);
+	write(1, "\n", 1);
+	ft_putnbr(1234);
+	write(1, "\n", 1);
+	ft_putnbr(-1234);
+}*/
+
++++++++++++++++++++++++++++++++++++++
 
 
-ex02
+
+ex03
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -147,6 +211,45 @@ int		main(void)
 	str = " ---+--+1234ab567";
 	printf("%d\n", ft_atoi(str));
 }
+
++++++++++++++++++++++++++++++++
+int	ft_atoi(char *str)
+{
+	int	c;
+	int	s;
+	int	res;
+
+	c = 0;
+	s = 1;
+	res = 0;
+	while (str[c] && ((str[c] >= 9 && str[c] <= 13) || str[c] == 32))
+		c++;
+	while (str[c] && (str[c] == '+' || str[c] == '-'))
+	{
+		if (str[c] == '-')
+			s *= -1;
+		c++;
+	}
+	while (str[c] && (str[c] >= '0' && str[c] <= '9'))
+	{
+		res = (str[c] - '0') + (res * 10);
+		c++;
+	}
+	return (res * s);
+}
+/*
+#include <stdio.h>
+int	main()
+{
+	int	n;
+
+	n = ft_atoi("");//-12066
+	printf("%d", n);
+}*/
+
+++++++++++++++++++++++++++++++++++
+
+
 
 
 ex04
@@ -234,7 +337,62 @@ int		main(void)
 	ft_putnbr_base(INT_MAX, "0123456789");
 }
 
++++++++++++++++++++++++++++++++++++++++++++++
 
+#include <unistd.h>
+
+void	ft_putnbr_base_rec(int nbr, char *base, int size)
+{
+	unsigned char	a;
+	unsigned int	n;
+
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		n = nbr * (-1);
+	}
+	else
+		n = nbr;
+	if (n >= (unsigned int)size)
+		ft_putnbr_base_rec(n / size, base, size);
+	a = base[n % size];
+	write(1, &a, 1);
+}
+
+int	ft_ver_bas(char *base)
+{
+	int	i;
+
+	i = 0;
+	while (base[i] != '\0')
+	{
+		if (base[i] == '+' || base[i] == '-' || base[i] == base[i + 1])
+			return (0);
+		i++;
+	}
+	if (i <= 1)
+		return (0);
+	return (1);
+}
+
+void	ft_putnbr_base(int nbr, char *base)
+{
+	int	s;
+
+	s = 0;
+	if (ft_ver_bas(base) == 1)
+	{
+		while (base[s] != '\0')
+			s++;
+		ft_putnbr_base_rec(nbr, base, s);
+	}
+}
+
++++++++++++++++++++++++++++++++++++++++++++
+
+	
+
+	
 ex05
 
 #include <unistd.h>
@@ -338,4 +496,76 @@ int		main(void)
 	printf("%d\n", ft_atoi_base("-1e240", "0123456789abcdef"));
 	fflush(stdout);
 }
+
++++++++++++++++++++++++++++++++++++++++++++
+
+int	digit(char s, char *base)
+{
+	int	n;
+
+	n = 0;
+	while (base[n] != 0 && base[n] != s)
+		n++;
+	return (n);
+}
+
+int	verificar(char *base)
+{
+	int	i;
+	int	o;
+
+	i = 0;
+	o = 0;
+	while (base[i])
+	{
+		o = 0;
+		while (o < i)
+		{
+			if (base[i] == base[o] || (base[i] >= 9 && base[i] <= 13)
+				|| base[i] == 32 || base[i] == '-' || base[i] == '+')
+				return (0);
+			o++;
+		}
+		i++;
+	}
+	if (i <= 1)
+		return (0);
+	return (i);
+}
+
+int	ft_atoi_base(char *str, char *base)
+{
+	int	basesize;
+	int	nb;
+	int	neg;
+
+	nb = 0;
+	neg = 1;
+	basesize = verificar(base);
+	if (basesize <= 1)
+		return (0);
+	while (*str != 0 && ((*str >= 9 && *str <= 13) || *str == 32))
+		str++;
+	while (*str != 0 && (*str == '-' || *str == '+'))
+	{
+		if (*str++ == '-')
+			neg *= -1;
+	}
+	while (*str != 0 && (digit(*str, base) < basesize))
+	{
+		nb = (basesize * nb) + (digit(*str, base));
+		str++;
+	}
+	return (nb * neg);
+}
+/*
+#include <stdio.h>
+int main()
+{
+	int	n;
+
+	n = ft_atoi_base("", "01234567");//-12066
+	printf("%d", n);
+}*/
+
 
