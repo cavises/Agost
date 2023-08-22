@@ -101,7 +101,48 @@ int		main(void)
 
 ex03
 
+#include <stdio.h>
+#include <string.h>
 
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
+{
+	int end_dest;
+	int i_src;
+
+	end_dest = 0;
+	while (dest[end_dest] != '\0')
+		end_dest++;
+	i_src = 0;
+	while (src[i_src] != '\0' && nb > 0)
+	{
+		dest[end_dest + i_src] = src[i_src];
+		i_src++;
+		nb--;
+	}
+	dest[end_dest + i_src] = '\0';
+	return (dest);
+}
+
+int		main(void)
+{
+	char	*str_base;
+	char	dest[100];
+	char	dest2[100];
+	char	*src;
+	int		index;
+
+	str_base = "Hello";
+	src = " 424242";
+	index = 0;
+	while (index < 6)
+	{
+		dest[index] = str_base[index];
+		dest2[index] = str_base[index];
+		index++;
+	}
+	printf("c  : %s$\n", strncat(dest, src, 4));
+	printf("ft : %s$\n", ft_strncat(dest2, src, 4));
+}
 
 ex04
 
