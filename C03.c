@@ -187,6 +187,107 @@ int		main(void)
 	printf("c  : %s$\n", result_c);
 	printf("ft : %s$\n", result_ft);
 }
++++++++++++++++++++++++
+char *
+strstr(string, substring)
+    register char *string;	/* String to search. */
+    char *substring;		/* Substring to try to find in string. */
+{
+    register char *a, *b;
+
+    /* First scan quickly through the two strings looking for a
+     * single-character match.  When it's found, then compare the
+     * rest of the substring.
+     */
+
+    b = substring;
+    if (*b == 0) {
+	return string;
+    }
+    for ( ; *string != 0; string += 1) {
+	if (*string != *b) {
+	    continue;
+	}
+	a = string;
+	while (1) {
+	    if (*b == 0) {
+		return string;
+	    }
+	    if (*a++ != *b++) {
+		break;
+	    }
+	}
+	b = substring;
+    }
+    return NULL;
+}
+
++++++++++++
+#include <stdio.h>
+ 
+// Function to implement `strstr()` function using KMP algorithm
+const char* strstr(const char* X, const char* Y, int m, int n)
+{
+    // base case 1: `Y` is NULL or empty
+    if (*Y == '\0' || n == 0) {
+        return X;
+    }
+ 
+    // base case 2: `X` is NULL, or X's length is less than Y's
+    if (*X == '\0' || n > m) {
+        return NULL;
+    }
+ 
+    // `next[i]` stores the index of the next best partial match
+    int next[n + 1];
+ 
+    for (int i = 0; i < n + 1; i++) {
+        next[i] = 0;
+    }
+ 
+    for (int i = 1; i < n; i++)
+    {
+        int j = next[i + 1];
+ 
+        while (j > 0 && Y[j] != Y[i]) {
+            j = next[j];
+        }
+ 
+        if (j > 0 || Y[j] == Y[i]) {
+            next[i + 1] = j + 1;
+        }
+    }
+ 
+    for (int i = 0, j = 0; i < m; i++)
+    {
+        if (*(X + i) == *(Y + j))
+        {
+            if (++j == n) {
+                return (X + i - j + 1);
+            }
+        }
+        else if (j > 0)
+        {
+            j = next[j];
+            i--;    // since `i` will be incremented in the next iteration
+        }
+    }
+ 
+    return NULL;
+}
+ 
+// Implement `strstr()` function in C
+int main(void)
+{
+    char *X = "Techie Delight – Ace the Technical Interviews";
+    char *Y = "Ace";
+ 
+    printf("%s\n", strstr(X, Y, strlen(X), strlen(Y)));
+ 
+    return 0;
+}
+++++++++++++++++++++
+
 
 
 ex05
