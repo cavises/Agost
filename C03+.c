@@ -206,3 +206,53 @@ int		main(void)
 	printf("c  : %s$\n", result_c);
 	printf("ft : %s$\n", result_ft);
 }
+
+
+
+ex05
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	i_dest;
+	unsigned int	i_src;
+	unsigned int	i;
+
+	i_dest = 0;
+	i_src = 0;
+	i = 0;
+	while (dest[i_dest])
+		i_dest++;
+	while (src[i_src])
+		i_src++;
+	if (size <= i_dest)
+		return (i_src + size);
+	while (src[i] && (i_dest + i) < (size - 1))
+	{
+		dest[i_dest + i] = src[i];
+		i++;
+	}
+	dest[i_dest + i] = '\0';
+	return (i_src + i_dest);
+}
+
+int				main(void)
+{
+	char	*str_base;
+	char	dest[100];
+	char	dest2[100];
+	char	*src;
+	int		i;
+
+	str_base = "Hello";
+	src = " 424242";
+	i = 0;
+	while (i < 10)
+	{
+		dest[i] = str_base[i];
+		dest2[i] = str_base[i];
+		i++;
+	}
+	//printf("c  : (%lu) $%s$\n", strlcat(dest, src, 0), dest);
+	printf("ft : (%d) $%s$\n", ft_strlcat(dest2, src, 10), dest2);
+  return (0);
+}
