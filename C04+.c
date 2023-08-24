@@ -10,7 +10,14 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+int	main(void)
+{
+	char *str;
 
+	str = "Hello 424242";
+	printf("c  : %lu\n", strlen(str));
+	printf("ft : %d\n", ft_strlen(str));
+}
 
 ex01
 
@@ -35,3 +42,7 @@ int		main(void)
 	str = "Hello 424242";
 	ft_putstr(str);
 }
+
+
+ex02
+
