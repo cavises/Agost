@@ -177,4 +177,48 @@ int	main(void)
 
 ex06
 
+#include <stdio.h>
+#include <limits.h>
+
+int	ft_is_prime(int nb)
+{
+	int	i;
+	int	divisors;
+
+  i = 1;
+  divisors = 0;
+	if (nb <= 1)
+		return (0);
+	while (i <= nb)
+	{
+	  if (nb % i == 0)
+	    divisors++;
+	  i++;
+	}
+	if (divisors == 2)
+		return (1);
+	else
+	  return (0);
+}
+
+int	main(void)
+{
+	int	number;
+	int	results;
+	int	count;
+
+	number = 0;
+	count = 0;
+	while (number < 15000)
+	{
+		results = ft_is_prime(number);
+		if (results == 1)
+		  printf("is_prime(%d) = %d\n", number, results);
+		number++;
+		count = results + count;
+	}
+	//printf("is_prime(%d) = %d\n", INT_MAX, ft_is_prime(INT_MAX));
+	printf("first 15'000 number, %d prime\n", count);
+	return (0);
+}
 
