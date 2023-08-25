@@ -196,7 +196,7 @@ int	ft_verify_base(char *base)
 	int j;
 
 	i = 0;
-	j = 1;
+	j = i + 1;
 	while (base[i] != '\0')
 	{
 		if (base[i] == '+' || base[i] == '-')
