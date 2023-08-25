@@ -139,4 +139,42 @@ int	main(void)
 
 ex05
 
+#include <stdio.h>
+#include <limits.h>
+
+int	ft_sqrt(int nb)
+{
+	unsigned int		sqrt;
+	unsigned int		i;
+
+	if (nb < 0)
+		return (0);
+	if (nb <= 1)
+		return (nb);
+	i = 0;
+	while ((sqrt = i * i) <= (unsigned int)nb)
+		i++;
+	i -= 1;
+	return (i * i == (unsigned int)nb ? i : 0);
+}
+
+int	main(void)
+{
+	int nbr;
+
+	nbr = -2;
+	while (nbr < 26)
+	{
+		printf("sqrt(%d) = %d\n", nbr, ft_sqrt(nbr));
+		nbr++;
+	}
+	printf("sqrt(%d) = %d\n", 1000000, ft_sqrt(1000000));
+	printf("sqrt(%d) = %d\n", INT_MAX, ft_sqrt(INT_MAX));
+	printf("sqrt(%d) = %d\n", INT_MIN, ft_sqrt(INT_MIN));
+	printf("sqrt(%d) = %d\n", 2147395600, ft_sqrt(2147395600));
+}
+
+
+ex06
+
 
