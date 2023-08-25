@@ -222,3 +222,56 @@ int	main(void)
 	return (0);
 }
 
+
+ex07
+
+#include <stdio.h>
+#include <limits.h>
+
+int	ft_is_prime(int nb)
+{
+	int	i;
+	int	divisors;
+
+  i = 1;
+  divisors = 0;
+	if (nb <= 1)
+		return (0);
+	while (i <= nb)
+	{
+	  if (nb % i == 0)
+	    divisors++;
+	  i++;
+	}
+	if (divisors == 2)
+		return (1);
+	else
+	  return (0);
+}
+
+int	ft_find_next_prime(int nb)
+{
+	while (1 == 1)
+	{
+		if (ft_is_prime(nb))
+			return (nb);
+		nb++;
+	}
+}
+
+int	main(void)
+{
+	int	index;
+
+	index = -2;
+	while (index < 100)
+	{
+		printf("find_next_prime(%d) = %d\n", index, ft_find_next_prime(index));
+		index++;
+	}
+	//printf("find_next_prime(%d) = %d\n", INT_MAX, ft_find_next_prime(INT_MAX));
+}
+
+
+ex08
+
