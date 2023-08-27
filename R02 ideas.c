@@ -168,7 +168,7 @@ void	ft_open_file(char *res, int size)
 	ret = read(file, res, size);
 }
 
-
+==================================================================================================================
 https://github.com/kingdcreations/42Rush-02/blob/master/src/main.c
 
 MAKEFILE
