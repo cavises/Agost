@@ -158,6 +158,28 @@ int	ft_sqrt(int nb)
 	return (i * i == (unsigned int)nb ? i : 0);
 }
 
+//versio 42
+int	ft_sqrt(int nb)
+{
+	unsigned int	i;
+
+	if (nb < 0)
+		return (0);
+	if (nb <= 1)
+		return (nb);
+	i = 0;
+	while (i * i <= (unsigned int)nb)
+		i++;
+	i -= 1;
+	if (i * i == (unsigned int)nb)
+		return (i);
+	else
+		return (0);
+}
+
+#include <stdio.h>
+#include <limits.h>
+
 int	main(void)
 {
 	int nbr;
@@ -171,6 +193,8 @@ int	main(void)
 	printf("sqrt(%d) = %d\n", 1000000, ft_sqrt(1000000));
 	printf("sqrt(%d) = %d\n", INT_MAX, ft_sqrt(INT_MAX));
 	printf("sqrt(%d) = %d\n", INT_MIN, ft_sqrt(INT_MIN));
+	printf("sqrt(%u) = %u\n", UINT_MAX, ft_sqrt(UINT_MAX));
+	printf("sqrt(%u) = %u\n", 4294967295, ft_sqrt(4294967295));
 	printf("sqrt(%d) = %d\n", 2147395600, ft_sqrt(2147395600));
 }
 
