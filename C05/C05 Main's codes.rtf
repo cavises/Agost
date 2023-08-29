@@ -1,0 +1,155 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Ex00\
+\
+#include <stdio.h>\
+\
+int	main(void)\
+\{\
+	int n;\
+\
+	n = -2;\
+	while (n < 7)\
+	\{\
+		printf("fact(%d) = %d\\n", n, ft_iterative_factorial(n));\
+		n++;\
+	\}\
+\}\
+\
+\
+Ex01\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 #include <stdio.h>\
+\
+int	main(void)\
+\{\
+	int n;\
+\
+	n = -2;\
+	while (n < 7)\
+	\{\
+		printf("fact(%d) = %d\\n", n, ft_recursive_factorial(n));\
+		n++;\
+	\}\
+\}\
+\
+\
+Ex02\
+\
+#include <stdio.h>\
+\
+int	main(void)\
+\{\
+	printf("10^2 = %d\\n", ft_iterative_power(10, 2));\
+	printf("10^0 = %d\\n", ft_iterative_power(10, 0));\
+	printf("10^-1 = %d\\n", ft_iterative_power(10, -1));\
+	printf("10^5 = %d\\n", ft_iterative_power(10, 5));\
+\}\
+\
+\
+Ex03\
+\
+#include <stdio.h>\
+\
+int	main(void)\
+\{\
+	printf("10^2 = %d\\n", ft_recursive_power(10, 2));\
+	printf("10^0 = %d\\n", ft_recursive_power(10, 0));\
+	printf("10^-1 = %d\\n", ft_recursive_power(10, -1));\
+	printf("10^5 = %d\\n", ft_recursive_power(10, 5));\
+\}\
+\
+\
+Ex04\
+\
+#include <stdio.h>\
+\
+int	main(void)\
+\{\
+	int	index;\
+\
+	index = -2;\
+	while (index < 16)\
+	\{\
+		printf("fibonacci(%d) = %d\\n", index, ft_fibonacci(index));\
+		index++;\
+	\}\
+\}\
+\
+\
+Ex05\
+\
+#include <stdio.h>\
+#include <limits.h>\
+\
+int	main(void)\
+\{\
+	int nbr;\
+\
+	nbr = -2;\
+	while (nbr < 26)\
+	\{\
+		printf("sqrt(%d) = %d\\n", nbr, ft_sqrt(nbr));\
+		nbr++;\
+	\}\
+	printf("sqrt(%d) = %d\\n", 1000000, ft_sqrt(1000000));\
+	printf("sqrt(%d) = %d\\n", INT_MAX, ft_sqrt(INT_MAX));\
+	printf("sqrt(%d) = %d\\n", INT_MIN, ft_sqrt(INT_MIN));\
+	printf("sqrt(%u) = %u\\n", UINT_MAX, ft_sqrt(UINT_MAX));\
+	printf("sqrt(%u) = %u\\n", 4294967295, ft_sqrt(4294967295));\
+	printf("sqrt(%d) = %d\\n", 2147395600, ft_sqrt(2147395600));\
+\}\
+\
+\
+Ex06\
+\
+#include <stdio.h>\
+#include <limits.h>\
+\
+int	main(void)\
+\{\
+	int	number;\
+	int	results;\
+	int	count;\
+\
+	number = 0;\
+	count = 0;\
+	while (number < 15000)\
+	\{\
+		results = ft_is_prime(number);\
+		if (results == 1)\
+		  printf("is_prime(%d) = %d\\n", number, results);\
+		number++;\
+		count = results + count;\
+	\}\
+	//printf("is_prime(%d) = %d\\n", INT_MAX, ft_is_prime(INT_MAX));\
+	printf("first 15'000 number, %d prime\\n", count);\
+	return (0);\
+\}\
+\
+\
+Ex07\
+\
+#include <stdio.h>\
+#include <limits.h>\
+\
+int	main(void)\
+\{\
+	int	index;\
+\
+	index = -2;\
+	while (index < 100)\
+	\{\
+		printf("find_next_prime(%d) = %d\\n", index, ft_find_next_prime(index));\
+		index++;\
+	\}\
+	//printf("find_next_prime(%d) = %d\\n", INT_MAX, ft_find_next_prime(INT_MAX));\
+\}\
+\
+}
