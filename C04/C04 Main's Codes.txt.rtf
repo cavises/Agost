@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Ex00\
+\
+int	main(void)\
+\{\
+	char *str;\
+\
+	str = "Hello 424242";\
+	printf("c  : %lu\\n", strlen(str));\
+	printf("ft : %d\\n", ft_strlen(str));\
+\}\
+\
+\
+Ex01\
+\
+int		main(void)\
+\{\
+	char *str;\
+\
+	str = "Hello 424242";\
+	ft_putstr(str);\
+\}\
+\
+\
+Ex02\
+\
+int	main()\
+\{\
+	ft_putnbr(-2147483648);\
+	write(1, "\\n", 1);\
+	ft_putnbr(2147483647);\
+	write(1, "\\n", 1);\
+	ft_putnbr(1234);\
+	write(1, "\\n", 1);\
+	ft_putnbr(-1234);\
+	write(1, "\\n", 1);\
+	ft_putnbr(0);\
+\}\
+\
+\
+\
+Ex03\
+\
+int		main(void)\
+\{\
+	char *str;\
+	char *str2;\
+\
+	str = " ---+--+1234ab567";\
+	printf("%d\\n", ft_atoi(str));\
+	str2 = " -1234ab567";\
+	printf("%d\\n", atoi(str2));\
+\}\
+\
+\
+\
+Ex04\
+\
+int		main(void)\
+\{\
+	ft_putnbr_base(-123456, "helo");\
+	printf("\\n");\
+	ft_putnbr_base(-2147483648, "0123456789");\
+	printf("\\n");\
+	ft_putnbr_base(2147483647, "0123456789");\
+\}\
+\
+\
+\
+Ex05\
+\
+int		main(void)\
+\{\
+	printf("%d\\n", ft_atoi_base("-123456", "0123456789"));\
+	printf("%d\\n", ft_atoi_base("11110001001000000", "01"));\
+	printf("%d\\n", ft_atoi_base("-1e240", "0123456789abcdef"));\
+\}\
+\
+\
+}
